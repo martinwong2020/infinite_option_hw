@@ -1,0 +1,49 @@
+.create_container{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}
+.create_form_container{
+    width:19vw;
+    color:white;
+    font-family: 'Iter';
+}
+.create_form_container form h2, .create_form_container .footer_label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.create_form_container form h2, .create_form_container form h4{
+    font-family:'Fira Sans';
+}
+.create_form_container form h4{
+    width:80%;
+    word-spacing: 5px;
+    text-align: center;
+}
+.create_form_container form .login_link{
+    color:#F26457;
+    cursor: pointer;
+}
+.create_form_container form input {
+    width: 100%;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display:flex;
+}
+.create_form_container form input[type=submit] {
+    background-color: #F26457;
+    padding: 15px 20px;
+    outline:none;
+    border:none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin:25px 0;
+
+    color:white;
+}

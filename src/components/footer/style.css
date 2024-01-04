@@ -1,0 +1,15 @@
+.home_footer{
+    width:19vw;
+    display:flex;
+    justify-content:center;
+}
+.home_footer .footer_img_container{
+    position: fixed;
+    bottom:-5px;
+    width:auto;
+    height:auto;
+}
+.home_footer .footer_img_container img{
+    width:auto;
+    height:auto;
+}

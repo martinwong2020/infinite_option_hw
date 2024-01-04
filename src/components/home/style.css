@@ -1,0 +1,40 @@
+
+.home_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.home_content{
+    width:100vw;
+    display:flex;
+    justify-content: center;
+    margin-top:3%;
+}
+.home_content .content_container{
+    display:grid;
+    grid-template-columns: 100px 3fr 3fr 100px;
+    grid-template-rows: auto;
+    grid-template-areas: 
+      ". area1 area2 ."
+      ". area3 area4 .";
+
+}
+.home_content .content_container .find{
+    grid-area:area1;
+}
+.home_content .content_container .rsvp{
+    grid-area:area2;
+}
+.home_content .content_container .attend{
+    grid-area:area3;
+}
+.home_content .content_container .create{
+    grid-area:area4;
+}
+.home_content .content_container .content_container_button{
+    align-self: center;
+    justify-self: center;
+    height:100%;
+    cursor: pointer;
+}
