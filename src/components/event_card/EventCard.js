@@ -1,31 +1,18 @@
 import React from 'react'
-import Header from '../header/Header'
-import "./style.css";
-
+import "./style.css"
 import card_img from "../../images/19873 21.png";
 import card_alarm from "../../images/alarm-clock.png"
 import card_location from "../../images/icon.png"
-import { useNavigate } from 'react-router-dom';
-import EventCard from '../event_card/EventCard';
-function Event() {
-  const navigate=useNavigate();
+function EventCard({date,title,startTime,endTime,location}) {
   return (
-    <div className="event_container">
-        <Header />
-        <section className="event_content_container">
-          <div className="create_event_container">
-              <h1>Create New Event</h1>
-              <button className="create_button red_button" onClick={(e)=>{e.preventDefault(); navigate("/eventtype")}}>Create</button>
-          </div>
-          <h1>Edit Event</h1>
-          {/* <div className="event_display">
-            <h1>Edit Event</h1>
+    <div className="event_card_container">
+        <div className="event_display">
             <div className="card_container">
               <div className="card_date_container">
-                June 22
+                {date}
               </div>
               <div className="card_name_container">
-                Career Fair for The Exceptional
+                {title}
               </div>
               <div className="card_content_container">
                 <div className="card_img_container">
@@ -35,14 +22,14 @@ function Event() {
                   <div className="card_time">
                     <img src={card_alarm} alt="card_alarm" />
                     <p className="card_info_text">
-                      2:30PM - 3:30PM
+                      {startTime} - {endTime}
                     </p>
                     
                   </div>
                   <div className="card_location">
                     <img src={card_location} alt="card_location" />
                     <p className="card_info_text">
-                      San Jose, CA
+                      {location}
                     </p>
                   </div>
                   <button className="card_register">
@@ -51,11 +38,10 @@ function Event() {
                 </div>
               </div>
             </div>
-          </div> */}
-          <EventCard date={"June 22"} title={"Career Fair for the Exceptional"} startTime={"2:30"} endTime={"3:30"} location={"San Jose, CA"}/>
-        </section>
+          </div>
+
     </div>
   )
 }
 
-export default Event
+export default EventCard

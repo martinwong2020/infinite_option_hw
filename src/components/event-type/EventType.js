@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CreateEventHeader from '../create-event-header/CreateEventHeader'
 import "./style.css"
 import ContinueButton from '../continue_button/ContinueButton';
-function EventType() {
+function EventType({handleStartTime, handleEndTime, handleDate, handleIndustry, handleCapacity}) {
     const back_path="/event"
     const [event_types,setEvent_types]=useState([
         {type:"Business Marketing", bgcolor:"#C2E9D9",dot:"#12B76A",selected:false},
@@ -13,20 +13,49 @@ function EventType() {
     const [nolimit, setNolimit] = useState(false);
     const [customlimit, setCustomlimit] = useState(false);
     const [customlimitnumber,setCustomlimitnumber]=useState(0);
+    const [eventStartTime,setEventStartTime]=useState("");
+    const [eventEndTime,setEventEndTime]=useState("");
+    const [eventDate,setEventDate]=useState("");
     const handleNoLimitChange = () => {
         setNolimit(!nolimit);
         if (!nolimit) {
             setCustomlimit(false);
         }
-        console.log("checked",);
+        
       };
     
-      const handleCustomLimitChange = () => {
+    const handleCustomLimitChange = () => {
         setCustomlimit(!customlimit);
         if (!customlimit) {
             setNolimit(false);
         }
-      };
+    };
+    useEffect(()=>{
+        handleStartTime(eventStartTime);
+        console.log(eventStartTime,typeof(eventStartTime));
+    },[eventStartTime]);
+    useEffect(()=>{
+        handleEndTime(eventEndTime);
+    },[eventEndTime]);
+    useEffect(()=>{
+        handleDate(eventDate);
+    },[eventDate]);
+    useEffect(()=>{
+        for(let i=0;i<event_types.length;i++){
+            if(event_types[i].selected){
+                handleIndustry(event_types[i].type);
+                break;
+            }
+        }
+    },[event_types])
+    useEffect(()=>{
+        if(nolimit){
+            handleCapacity("No Limit");
+        }
+        if(customlimit){
+            handleCapacity(customlimitnumber);
+        }
+    },[nolimit,customlimit,customlimitnumber])
     return (
         <div className="event_type_container">
             <CreateEventHeader destination={back_path} />
@@ -60,8 +89,8 @@ function EventType() {
                         <label for="start_time">Time</label>
                     </div>
                     <div className="event_input">
-                        <input type="date" id="start_date" />
-                        <input type="time" id="start_time" />
+                        <input type="date" id="start_date" value={eventDate} onChange={(e)=>{setEventDate(e.target.value)}} />
+                        <input type="time" id="start_time" value={eventStartTime} onChange={(e)=>{setEventStartTime(e.target.value)}}/>
                     </div>
                     <div className="event_label">
                         <label for="start_date">End Date</label>
@@ -69,7 +98,7 @@ function EventType() {
                     </div>
                     <div className="event_input">
                         <input type="date" id="start_date" />
-                        <input type="time" id="start_time" />
+                        <input type="time" id="start_time" value={eventEndTime} onChange={(e)=>{setEventEndTime(e.target.value)}}/>
                     </div>
                     
                 </div>
