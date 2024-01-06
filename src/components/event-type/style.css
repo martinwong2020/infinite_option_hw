@@ -100,3 +100,10 @@
 .event_type_container .continue_component_container{
     width:19vw;
 }
+.event_input .custom_datepicker_container{
+    width:50%;
+    background-color: green;
+}
+.event_input .custom_datepicker{
+    width:20px;
+}

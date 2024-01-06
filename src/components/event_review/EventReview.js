@@ -59,9 +59,9 @@ function EventReview({
           </section>
           <section className="pre-event_question">
             <p><strong>Pre-Event Questionaire</strong></p>
+            {/* <p>What is your current role?</p>
             <p>What is your current role?</p>
-            <p>What is your current role?</p>
-            <p>What is your current role?</p>
+            <p>What is your current role?</p> */}
             {eventQuestion.map((question,index)=>(
               <p value={index}>{question}</p>
             ))}

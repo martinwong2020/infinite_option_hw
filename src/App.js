@@ -12,7 +12,7 @@ import EventQuestion from './components/event_question/EventQuestion';
 import EventImage from './components/event_img/EventImage';
 import EventTitle from './components/event_title/EventTitle';
 import EventReview from './components/event_review/EventReview';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   const [eventDate,setEventDate]=useState("");

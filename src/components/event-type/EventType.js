@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import CreateEventHeader from '../create-event-header/CreateEventHeader'
 import "./style.css"
 import ContinueButton from '../continue_button/ContinueButton';
+import DateInput from '../date_picker/DateInput';
 function EventType({handleStartTime, handleEndTime, handleDate, handleIndustry, handleCapacity}) {
     const back_path="/event"
     const [event_types,setEvent_types]=useState([
@@ -16,6 +17,12 @@ function EventType({handleStartTime, handleEndTime, handleDate, handleIndustry, 
     const [eventStartTime,setEventStartTime]=useState("");
     const [eventEndTime,setEventEndTime]=useState("");
     const [eventDate,setEventDate]=useState("");
+    const months = [
+        "January", "February", "March",
+        "April", "May", "June",
+        "July", "August", "September",
+        "October", "November", "December"
+    ];
     const handleNoLimitChange = () => {
         setNolimit(!nolimit);
         if (!nolimit) {
@@ -30,15 +37,49 @@ function EventType({handleStartTime, handleEndTime, handleDate, handleIndustry, 
             setNolimit(false);
         }
     };
+    const handleDateFormat=(date)=>{
+        let new_date="";
+        const monthNumber = parseInt(date.slice(5, 7), 10);
+        if(monthNumber>0){
+           new_date=months[monthNumber - 1]+" "+date.slice(8,10)+","+date.slice(0,4);
+        }else{
+            new_date=date.slice(5,7)+" "+date.slice(8,10)+","+date.slice(0,4);
+        }
+        
+        return new_date;
+    };
+    const handleTimeFormat=(time)=>{
+        let hour=parseInt(time.slice(0,2), 10);
+        let am=false;
+        if(hour==0){
+            hour=12;
+            am=true;
+        }
+        if(hour<12){
+            am=true;
+        }
+        if(hour>12){
+            hour=hour-12;
+        }
+        let new_time=""+hour+":"+time.slice(3,5);
+        if(am){
+            new_time+="am";
+        }
+        else{
+            new_time+="pm";
+        }
+        console.log(new_time);
+        return new_time;
+    }
     useEffect(()=>{
-        handleStartTime(eventStartTime);
-        console.log(eventStartTime,typeof(eventStartTime));
+        handleStartTime(handleTimeFormat(eventStartTime));
     },[eventStartTime]);
     useEffect(()=>{
-        handleEndTime(eventEndTime);
+        handleEndTime(handleTimeFormat(eventEndTime));
     },[eventEndTime]);
     useEffect(()=>{
-        handleDate(eventDate);
+        let date=handleDateFormat(eventDate);
+        handleDate(date);
     },[eventDate]);
     useEffect(()=>{
         for(let i=0;i<event_types.length;i++){
@@ -55,7 +96,8 @@ function EventType({handleStartTime, handleEndTime, handleDate, handleIndustry, 
         if(customlimit){
             handleCapacity(customlimitnumber);
         }
-    },[nolimit,customlimit,customlimitnumber])
+    },[nolimit,customlimit,customlimitnumber]);
+    
     return (
         <div className="event_type_container">
             <CreateEventHeader destination={back_path} />
@@ -89,8 +131,8 @@ function EventType({handleStartTime, handleEndTime, handleDate, handleIndustry, 
                         <label for="start_time">Time</label>
                     </div>
                     <div className="event_input">
-                        <input type="date" id="start_date" value={eventDate} onChange={(e)=>{setEventDate(e.target.value)}} />
-                        <input type="time" id="start_time" value={eventStartTime} onChange={(e)=>{setEventStartTime(e.target.value)}}/>
+                        <input type="date" id="start_date" value={eventDate} onChange={(e)=>{setEventDate(e.target.value);}} />
+                        <input type="time" id="start_time" value={eventStartTime} onChange={(e)=>{setEventStartTime(e.target.value); handleTimeFormat(e.target.value)}}/>
                     </div>
                     <div className="event_label">
                         <label for="start_date">End Date</label>
